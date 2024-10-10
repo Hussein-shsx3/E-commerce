@@ -23,7 +23,7 @@ import { storeApp } from "./Store";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <Home />,
   },
   {
