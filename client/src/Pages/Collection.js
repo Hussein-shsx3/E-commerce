@@ -58,14 +58,6 @@ const Collection = () => {
     return categoryMatch && typeMatch && searchMatch;
   });
 
-  if (!products.length > 0) {
-    return (
-      <section className="relative w-full min-h-[100dvh] flex justify-center items-center">
-        <p>Loading...</p>
-      </section>
-    );
-  }
-
   return (
     <section className="relative w-full flex justify-center overflow-hidden">
       <div className="container w-full flex flex-col items-center px-2 md:px-0">
