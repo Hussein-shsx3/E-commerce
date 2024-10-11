@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import { errorHandler } from "./middleware/errorMiddleware.js";
 
 import registerRoute from "./routes/register.js";
 import authRoute from "./routes/auth.js";
