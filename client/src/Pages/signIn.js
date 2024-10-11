@@ -20,10 +20,6 @@ const SignIn = () => {
     password: "",
   });
 
-  useEffect(() => {
-    dispatch(clearStatus());
-  }, [dispatch]);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -37,12 +33,14 @@ const SignIn = () => {
     if (status === "succeeded") {
       toast.success("Sign in was successful");
       setTimeout(() => {
+        dispatch(clearStatus());
         navigate("/");
       }, 1000);
     } else if (status === "failed") {
+      dispatch(clearStatus());
       toast.error(error || "Sign in failed");
     }
-  }, [status, error, navigate]);
+  }, [status, error, navigate, dispatch]);
 
   return (
     <section className="relative w-full min-h-[100dvh] flex justify-center overflow-hidden">
