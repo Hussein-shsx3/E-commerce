@@ -29,7 +29,6 @@ app.use("/api/product", productsRoute);
 app.use("/api/orders", orderRoute);
 
 app.use(errorHandler);
-app.use(notFound);
 
 mongoose
   .connect(process.env.MONGODB)
