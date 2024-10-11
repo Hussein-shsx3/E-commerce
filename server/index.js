@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import { errorHandler } from "./middleware/errorMiddleware.js";
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 import registerRoute from "./routes/register.js";
 import authRoute from "./routes/auth.js";
@@ -29,6 +29,7 @@ app.use("/api/product", productsRoute);
 app.use("/api/orders", orderRoute);
 
 app.use(errorHandler);
+app.use(notFound);
 
 mongoose
   .connect(process.env.MONGODB)
