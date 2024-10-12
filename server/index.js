@@ -25,6 +25,10 @@ app.use(
 
 dotenv.config();
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Hello from the API' });
+});
+
 app.use("/api/register", registerRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
