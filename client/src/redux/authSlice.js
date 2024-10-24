@@ -36,9 +36,6 @@ const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.user = action.payload.userDetails;
-        state.token = action.payload.token;
-        cookies.set("token", action.payload.token, { path: "/" });
-        cookies.set("isAdmin", action.payload.isAdmin, { path: "/" });
       })
       .addCase(register.rejected, (state, action) => {
         state.status = "failed";
