@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
   totalAmount: 0,
-  shippingFee: 10,
   status: "idle",
 };
 

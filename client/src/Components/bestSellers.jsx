@@ -23,8 +23,8 @@ const BestSellers = () => {
       </p>
       <div className="w-full flex flex-wrap items-center justify-center gap-4 py-14">
         {products
-          .filter((product) => !product.isBestseller)
-          .slice(5, 10)
+          .filter((product) => product.isBestseller)
+          .slice(0, 5)
           .map((product, index) => (
             <Product
               key={index}
