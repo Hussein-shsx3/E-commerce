@@ -11,6 +11,7 @@ import productsRoute from "./routes/productsRoute.js";
 import orderRoute from "./routes/orderRoute.js";
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(
@@ -24,6 +25,15 @@ app.use(
 );
 
 dotenv.config();
+const KEEP_ALIVE_URL = process.env.KEEP_ALIVE_URL;
+
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
+app.get("/", (req, res) => {
+  res.status(200).send("API is running");
+});
 
 app.use("/api/register", registerRoute);
 app.use("/api/auth", authRoute);
@@ -34,13 +44,28 @@ app.use("/api/orders", orderRoute);
 app.use(errorHandler);
 app.use(notFound);
 
+const pingKeepAlive = async () => {
+  if (!KEEP_ALIVE_URL) {
+    return;
+  }
+
+  try {
+    await fetch(KEEP_ALIVE_URL);
+  } catch (error) {
+    console.log("Keep-alive ping failed:", error.message);
+  }
+};
+
 mongoose
   .connect(process.env.MONGODB)
   .then(() => {
     console.log("App connected to database");
-    //* http://localhost:5000
-    app.listen(process.env.PORT, () => {
-      console.log(`App is listening to port: ${process.env.PORT}`);
+    app.listen(PORT, () => {
+      console.log(`App is listening to port: ${PORT}`);
+      pingKeepAlive();
+      if (KEEP_ALIVE_URL) {
+        setInterval(pingKeepAlive, 14 * 60 * 1000);
+      }
     });
   })
   .catch((error) => {
